@@ -20,6 +20,19 @@
         android:id="@+id/comicFragment"
         android:name="com.example.xkdcapp.screens.comic.ComicFragment"
         android:label="ComicFragment"
-        tools:layout="@layout/fragment_comic"/>
+        tools:layout="@layout/fragment_comic">
+
+        <argument
+            android:name="comicId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="comicName"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

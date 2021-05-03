@@ -2,11 +2,13 @@ package com.example.xkdcapp.screens.comiclist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.inflate
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xkdcapp.R
 import com.example.xkdcapp.comics.Comic
 import com.example.xkdcapp.databinding.ComicListItemBinding
+import com.example.xkdcapp.screens.comiclist.ComicListFragmentDirections.Companion.actionComicFragment
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 import javax.inject.Provider
@@ -26,7 +28,7 @@ class ComicListAdapter @Inject constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
-        val view = DataBindingUtil.inflate<ComicListItemBinding>(
+        val view = inflate<ComicListItemBinding>(
             inflater.get(),
             R.layout.comic_list_item,
             parent,
@@ -42,6 +44,9 @@ class ComicListAdapter @Inject constructor(
             view.id.text = id
             view.name.text = name
             view.date.text = comicDetailList[position].date
+            view.container.setOnClickListener {
+                it.findNavController().navigate(actionComicFragment(id, name))
+            }
         }
     }
 
