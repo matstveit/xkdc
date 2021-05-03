@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">XkdcApp</string>
     <string name="search_hint">Search</string>
+    <string name="server_error_dialog_title">Server Error</string>
+    <string name="server_error_dialog_message">Communication with the server failed</string>
+    <string name="server_error_dialog_button_caption">OK</string>
 </resources>

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.xkdcapp.R
 import com.example.xkdcapp.comics.Comic
 import com.example.xkdcapp.comics.FetchComicListUseCase
+import com.example.xkdcapp.screens.comiclist.ComicListFragmentDirections.Companion.actionErrorDialogFragment
 import com.example.xkdcapp.screens.common.fragments.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_comic_list.*
@@ -52,7 +54,7 @@ class ComicListFragment : BaseFragment() {
                 comicList = result.data
                 comicAdapter.bindData(comicList)
             } else {
-                //TODO: error stuff
+                findNavController().navigate(actionErrorDialogFragment())
             }
             hideProgressIndication()
         })

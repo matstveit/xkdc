@@ -10,10 +10,12 @@
         android:name="com.example.xkdcapp.screens.comiclist.ComicListFragment"
         android:label="ComicListFragment"
         tools:layout="@layout/fragment_comic_list">
-
         <action
             android:id="@+id/actionComicFragment"
             app:destination="@id/comicFragment" />
+        <action
+            android:id="@+id/actionErrorDialogFragment"
+            app:destination="@id/errorDialogFragment" />
     </fragment>
 
     <fragment
@@ -21,18 +23,23 @@
         android:name="com.example.xkdcapp.screens.comic.ComicFragment"
         android:label="ComicFragment"
         tools:layout="@layout/fragment_comic">
-
         <argument
             android:name="comicId"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
-
         <argument
             android:name="comicName"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/actionErrorDialogFragment"
+            app:destination="@id/errorDialogFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/errorDialogFragment"
+        android:name="com.example.xkdcapp.screens.common.dialogs.ServerErrorDialogFragment" />
 
 </navigation>

@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.xkdcapp.R
 import com.example.xkdcapp.comics.FetchComicUseCase
+import com.example.xkdcapp.screens.comic.ComicFragmentDirections.Companion.actionErrorDialogFragment
 import com.example.xkdcapp.screens.common.fragments.BaseFragment
 import com.example.xkdcapp.screens.common.imageloader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +53,7 @@ class ComicFragment : BaseFragment() {
                 image.contentDescription = result.data.description
                 imageLoader.loadImage(result.data.imageUrl, image)
             } else {
-                //TODO: error stuff
+                findNavController().navigate(actionErrorDialogFragment())
             }
             hideProgressIndication()
         })
