@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/project_navigation"
+    app:startDestination="@id/comicListFragment">
+
+    <fragment
+        android:id="@+id/comicListFragment"
+        android:name="com.example.xkdcapp.screens.comiclist.ComicListFragment"
+        android:label="ComicListFragment"
+        tools:layout="@layout/fragment_comic_list">
+
+        <action
+            android:id="@+id/actionComicFragment"
+            app:destination="@id/comicFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/comicFragment"
+        android:name="com.example.xkdcapp.screens.comic.ComicFragment"
+        android:label="ComicFragment"
+        tools:layout="@layout/fragment_comic"/>
+
+</navigation>
