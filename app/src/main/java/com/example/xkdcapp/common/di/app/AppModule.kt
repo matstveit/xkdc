@@ -1,6 +1,7 @@
 package com.example.xkdcapp.common.di.app
 
 import com.example.xkdcapp.Constants.BASE_URL_XKCD
+import com.example.xkdcapp.networking.ComicApi
 
 import dagger.Module
 import dagger.Provides
@@ -34,4 +35,8 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    @Provides
+    @AppScope
+    fun comicApi(retrofit: Retrofit) = retrofit.create(ComicApi::class.java)
 }
