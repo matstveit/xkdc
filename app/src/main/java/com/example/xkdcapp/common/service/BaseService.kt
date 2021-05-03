@@ -1,4 +1,5 @@
 package com.example.xkdcapp.common.service
 
-class BaseService {
-}
+import android.app.Service
+
+abstract class BaseService: Service()
