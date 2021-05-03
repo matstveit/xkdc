@@ -13,7 +13,7 @@ import dagger.hilt.android.components.ActivityComponent
 object ActivityModule {
 
     @Provides
-    fun layoutInflater(activity: Activity) = LayoutInflater.from(activity)
+    fun layoutInflater(activity: Activity): LayoutInflater = LayoutInflater.from(activity)
 
     @Provides
     fun appCompatActivity(activity: Activity) = activity as AppCompatActivity

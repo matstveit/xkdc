@@ -8,12 +8,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.xkdcapp.R
+import com.example.xkdcapp.comics.FetchComicDetailUseCase
 import com.example.xkdcapp.comics.FetchComicUseCase
 import com.example.xkdcapp.screens.comic.ComicFragmentDirections.Companion.actionErrorDialogFragment
 import com.example.xkdcapp.screens.common.fragments.BaseFragment
 import com.example.xkdcapp.screens.common.imageloader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_comic.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -52,11 +54,30 @@ class ComicFragment : BaseFragment() {
                 message.text = result.data.message
                 image.contentDescription = result.data.description
                 imageLoader.loadImage(result.data.imageUrl, image)
+
+                fetchComicDetail(args.comicId, args.comicName)
+            } else {
+                hideProgressIndication()
+                findNavController().navigate(actionErrorDialogFragment())
+            }
+        })
+        viewModel.comicDetailResult.observe(this, { result ->
+            if (result is FetchComicDetailUseCase.Result.Success) {
+                result.data?.let {
+                    explanationTitle.visibility = View.VISIBLE
+                    explanation.text = it
+                } ?: Timber.e("comicDetailResult is empty")
             } else {
                 findNavController().navigate(actionErrorDialogFragment())
             }
             hideProgressIndication()
         })
+    }
+
+    private fun fetchComicDetail(comicId: String?, comicName: String?) {
+        if (comicId != null && comicName != null) {
+            viewModel.fetchComicDetail(comicId, comicName)
+        }
     }
 
     private fun fetchComic(comicId: String?) {
