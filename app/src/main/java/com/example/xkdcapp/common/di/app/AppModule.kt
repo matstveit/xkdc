@@ -1,7 +1,9 @@
 package com.example.xkdcapp.common.di.app
 
+import android.app.Application
 import com.example.xkdcapp.Constants.BASE_URL_XKCD
 import com.example.xkdcapp.Constants.BASE_URL_XKCD_DETAIL
+import com.example.xkdcapp.MyApplication
 import com.example.xkdcapp.common.di.Retrofit1
 import com.example.xkdcapp.common.di.Retrofit2
 import com.example.xkdcapp.networking.ComicApi
@@ -15,10 +17,21 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.io.File
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @AppScope
+    fun application(application: Application) = application as MyApplication
+
+    @Provides
+    @AppScope
+    fun externalCacheDirectory(application: Application): File? {
+        return application.externalCacheDir
+    }
 
     @AppScope
     @Provides
